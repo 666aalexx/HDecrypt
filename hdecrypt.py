@@ -2,14 +2,8 @@
 
 #Created by 666aalexx
 
-import hashlib; import sys; import argparse; import os;
-
-#Colours
-redColour = "\033[31m"
-greenColour = "\033[32m"
-yellowColour = "\033[33m"
-blueColour = "\033[34m"
-resetColour = "\033[0m"
+import hashlib, sys, argparse
+from pwn import *
 
 parser = argparse.ArgumentParser()
 parser.add_argument("-H", "--hash", required=True)
@@ -21,6 +15,9 @@ hash_file = args.hash
 algorithm = args.algorithm
 wordlist = args.wordlist
 
+p1 = log.progress("Decrypting hash")
+p2 = log.progress("Password")
+
 def main():
     with open(wordlist, "r") as wfile:
         for word in wfile:
@@ -31,12 +28,11 @@ def main():
                 for hashes in hfile:
                     hashes = hashes.strip()
                     if hword == hashes:
-                        os.system("clear")
-                        print(f"{greenColour}[+]{resetColour} {word}")
+                        p1.success("Completed")
+                        p2.success(word)
                         sys.exit(0)
                     else:
-                        os.system("clear")
-                        print(f"{redColour}[X] {resetColour}{word}")
+                        p2.status(word)
                         pass
 
 
