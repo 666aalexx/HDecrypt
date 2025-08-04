@@ -7,7 +7,7 @@
   
   chmod +x hdecrypt.py
   
-  python3 hdecypt.py -H hash -a algorithm -w wordlist
+  python3 hdecrypt.py -H hash -a algorithm -w wordlist
 ```
 
 ### Installation
